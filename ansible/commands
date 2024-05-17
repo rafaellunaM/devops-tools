@@ -1,0 +1,68 @@
+#########################
+#			#
+#	config ssh 	#
+#			#
+#########################
+Generate keys
+ssh-keygen -t ed25519 -C 'commit'
+
+Send keys
+ssh-copy-id -i ~/.ssh/file.pub user@ip
+
+
+#########################
+#			#
+#	Test ping	#
+#			#
+#########################
+command
+ansible all --key-file ~/.ssh/file.pub -i invetory -m ping
+
+
+#########################
+#			#
+#	ansible.cfg	#
+#			#
+#########################
+[defaults]
+inventory = inventory-test.yaml
+private_key_file = ~/.ssh/id_ed25519
+
+command test:
+ansible all --list-hosts
+
+#########################
+#			#	
+#	info.hosts	#
+#			#
+#########################
+ansible all -m gather_facts
+
+#########################
+#			#
+#  privilege scalation  #
+#			#
+#########################
+1. --become - modo sudo
+2. --ask-become-pass -  password for sudo
+
+ansible all -m apt -a update_cache=true --become --ask-become-pass
+
+#########################
+#			#
+#    start playbook     #
+#			#
+#########################
+ansible-playbook --ask-become-pass install_vim.yaml
+
+########################
+#		       # 
+#	info SO        # 
+#		       #
+########################
+distrbution all hosts:
+ansible all -m gather_facts |grep ansible_distribution
+
+distribution one hosts:
+ansible all -m gather_facts --limit 10.0.60.22|grep ansible_distribution
+

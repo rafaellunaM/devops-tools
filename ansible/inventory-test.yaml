@@ -1,0 +1,15 @@
+vars:
+  ansible_user: insta
+all:
+  hosts:
+   10.0.60.[21:22]
+
+db_servers:
+    vim_package: vim
+  hosts:
+    10.0.60.21
+
+web_servers:
+    apache_package: apache2
+  hosts:
+    10.0.60.22

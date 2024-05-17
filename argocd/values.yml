@@ -1,0 +1,113 @@
+## Argo Configs
+configs:
+  params:
+    server.insecure: true
+    redis.server: "x.x.x.x:x"
+    redis.db: 5
+
+  ###############
+  # policy rbac #
+  ###############
+  # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/
+  rbac:
+    create: true
+      #policy.default: "role:admin"
+    policy.csv: |
+      p, role:org-admin, applications, *, */*, allow
+      p, role:org-admin, clusters, get, *, allow
+      p, role:org-admin, repositories, get, *, allow
+      p, role:org-admin, repositories, create, *, allow
+      p, role:org-admin, repositories, update, *, allow
+      p, role:org-admin, repositories, delete, *, allow
+      p, role:org-admin, projects, get, *, allow
+      p, role:org-admin, projects, create, *, allow
+      p, role:org-admin, projects, update, *, allow
+      p, role:org-admin, projects, delete, *, allow
+      p, role:org-admin, logs, get, *, allow
+      p, role:org-admin, exec, create, */*, allow
+      g, ArgoCDAdmins, role:admin
+
+      # RO[
+      p, role:readonly, applications, get, */*, allow
+      p, role:readonly, applications, delete, */*, allow
+      g, readonly, role:readonly
+
+  #############
+  # configmap #
+  #############
+  cm:
+    url: https://argocd.marquesconsult.cloud/
+
+  ############
+  # Keycloak #
+  ############
+    oidc.config: |
+       name: Keycloak
+       issuer: "https://auth.marquesconsult.cloud/realms/marquesconsult"
+       clientID: argocd
+       clientSecret: $oidc-keycloak
+       requestedScopes: ["openid", "profile", "email", "groups"]
+         #requestedScopes:
+         #- openid
+         #- profile
+         #- email
+         #- groups
+       requestedIDTokenClaims:
+         groups:
+           essential: true
+
+  ###################
+  # secret keycloak #
+  ###################
+  secret:
+    extra:
+      oidc-keycloak: "kVDHordqAeRG4WykThi06235NtL1uo8m"
+###############
+  # cmp plugins #
+  ###############
+#  cmp:
+#    create: true
+#    clusterCredentials: 
+#       - name: k8s-dev
+#         server: https://10.3.0.80:6443
+#         labels: cluster
+#         config:
+#           bearerToken: "eyJhbGciOiJSUzI1NiIsImtpZCI6Ild6OEJUejdaZnF5TTNjbDJ2M2JKYnd4bmI1c212V2t5dkVOdF92ZGNPbzgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ29jZC10b2tlbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhcmdvY2QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJmZjM3NWUyZi02N2Y0LTRkYTYtYjE4OS0xMjIxOWM0M2I1NjIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDphcmdvY2QifQ.r694ZgWzbrVvYsuYJGp7QLFkwJsH1RwTkUOPw3PiaTmXAtvWiY0_CrpWkWKbTw6txqH5g0LGD-MEdRxQMEYM32ZRqH-tscdzakDBB3bpYt_XBjibMsMabeFgfNb9W3xZGsk5pB3tg7jxemHoWDbASs1x38sHVd-vqrLGmTZ0KHSFw8a4VAR7VkaGuubUgPSzlC2qQSIPbuNKr_NguUCBm-sHr8ScpVpRF7lIWSPOLpeJdg0PA4d5KLdW1W-Ba85eS8UqpAl1DYK6aBndi3_NsmFtPhnUCKpxb8IPhjSmgfrKAr_mctWkYm6bSHwCOLY2s32bfPDKfPNobDsMhPqgug"
+#           tlsClientConfig:
+#             insecure: false
+#             caData: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJT3NkSUhVWDRvNm93RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpBM01qY3dNREE1TkRGYUZ3MHpNekEzTWpRd01EQTVOREZhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURQak9WWW80K09qU0k2dTRnd3FMV0cvb3VSY1llU2hLVGZQOUFIMm5LTVA5czRYbFYyaGRlNk9uMngKVHN0b21GWU85eTVtREFqN00rbCtoZ1VXSlBOckNDUEhvVkdkSFhXbXNLNnpYKzM4azFXU2psK3FyYUlOb3JVUgpDNUtWanZYZGFYK0loY1JjV0VPdDNQOFRtU2thcXpPWGNDVUNScm5tQk5OZXhxT3g3U2JXVGRkNHFXQ3N4ZHlvCjZrOEtocWVJMVRSYldpMFo5dG4xamNab0l3S0pJSzEzZzk2dXJMRHRmV0dVb1dYRTJmczJaelFLVjdGd0l6RDEKWDJIWEtkQ3ZUdEdRZDgvcnV2b2xxVFhSa1FLWlZudThXRE1YdlNuMmR3enJVSGdXK1lSRWY0Ui85RVkyRHBQZgpLWWp3NDFDclhTTktSbmlmb21BcTFQMmxUUEZSQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJSVytXVTFEWkd6aGdPR0F1cUxIOFovaVB6aHBUQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQ3lMeVJ3MERHNApYMW9BeldhV1liTlRHaFlxVlhzM2d1aXR0RjAyUjFxRjVBZXdpaXEvdEUzOGdQMWdSeTJJMko0Q2U2TzgwdnRVCkJpSmc2d0lNZ0NNSDRsU2NVUXByMXhFYnYrSnY2YUZ5UnJWY0k0RUNiY0RoeGVIMzZkN3lzWDJCc05GYStpazcKK3hIZFBodlk2dGorWlNKdGxlM3ZvQ0tFY0tCdllVd3VuY3RKbmlNM0hyVEpxYjUvRlArVFF0OGx4RVJHMFMybwpXOElYN1RXQVU2MDU1OEdBMHR6bDNXSEc0WW5wZjFyODI1UHpJajZtRVNEV1NETjVpMklqbEVUTlJMMHJxVjJICnV4aWV0VzJPZHlSZUd2aGljK0VOdXVVSjN3dlNBTjM4dlBnZXlsc2hlSWhZcXlsU1A4QklXemcrbEw0eU1iZ1kKR2VnalJSa3VVbW5SCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+secretManifests:
+    - secrets.yaml
+
+#################
+# ingress nginx #
+#################
+server:
+  ingress:
+    enabled: true
+    hostname: argocd.marquesconsult.cloud
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-real-ip-cidr: "0.0.0.0/0"
+    extraTls:
+      - hosts:
+        - argocd.marquesconsult.cloud
+        secretName: wildcard-marquesconsult-cloud
+redis:
+  enabled: false
+
+argocdConfig:
+  configManagementPlugins: |
+    - name: keycloak
+      init:
+        command: ["argocd-keycloak"]
+      generate: |
+        command: ["argocd-keycloak", "generate"]
+      validate: |
+        command: ["argocd-keycloak", "validate"]
+
+  repositories: |
+    - url: https://github.com/argoproj/argocd-example-apps.git
+      sshPrivateKeySecret: |
+        name: argocd-repo-secret
+        key: sshPrivateKey

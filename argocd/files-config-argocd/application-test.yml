@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-nginx-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://x.x.x/x/teste-argocd.git
+    targetRevision: HEAD
+    path: deployment-test-rafael
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+#https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/
+#syncPolicy:
+#  syncOptions:
+#  - CreateNamespace=true
+#
+# Verifica a cada 3 min
+#  automated:
+#    selfHeal: true
+#    prune: true
+
+#https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+#https://www.youtube.com/watch?v=MeU5_k9ssrs 30min

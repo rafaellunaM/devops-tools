@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configfmap-keycloak
+data:
+  TZ: x
+  KC_USER: x
+  KC_PASSWORD: x
+  KC_DB: x
+  KC_DB_URL_HOST: x
+  KC_DB_URL_PORT: "x"
+  KC_DB_URL_DATABASE: x
+  KC_DB_USERNAME: x
+  KC_DB_PASSWORD: x
+  KEYCLOAK_ADMIN: x
+  KEYCLOAK_ADMIN_PASSWORD: x
+  KC_HOSTNAME_STRICT: "false"
+  KC_PROXY: edge
+  KC_METRICS_ENABLED: "true"
+#news
+  jgroups.dns.query: keycloak
+  KC_HEALTH_ENABLED: "true"
+  KC_LOG_CONSOLE_OUTPUT: json
+  KC_HOSTNAME: x
+  KEYCLOAK_PROXY_ADDRESS_FORWARDING: "true"
+  KEYCLOAK_FRONTEND_URL: https://x
+

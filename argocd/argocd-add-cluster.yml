@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dev-cluster-secret
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+stringData:
+  config: |
+    {
+      "bearerToken": "x",
+      "tlsClientConfig": {
+        "insecure": false,
+        "caData": "x"
+      }
+    }
+  name: k8s-dev
+  server: https://x.x.x.x:x
+type: Opaque

@@ -1,0 +1,14 @@
+executar tf:
+	terraform apply main.tf
+
+	executar apply sem precisar aprovar:
+		terraform apply -auto-approve
+
+verificar plano tf - mostar o que vai ser definido:
+	terraform plan
+
+inspecionar o estado atual da infra gerenciada pelo tf:
+	terraform show
+
+verificar se o formato do arquivo está correto:
+	terraform fmt

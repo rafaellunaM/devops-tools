@@ -1,0 +1,22 @@
+
+exemplo usando flag para passar env
+exemplo:
+terraform plan -var="aws_profile=tf014" -var="instance_type=t3.medium"
+terraform plan -var="aws_profile=tf014" -var="aws_profile=abc_def"   ele considera o último valor definido
+
+A Ordem de Precedência
+
+A ordem de precedência para fontes variáveis ​​é a seguinte, com fontes posteriores tendo precedência sobre as anteriores:
+
+1. Variáveis ​​ambientais
+
+2. O arquivo terraform.tfvars, se presente.
+
+3. O arquivo terraform.tfvars.json, se presente.
+
+4. Quaisquer arquivos *.auto.tfvars ou *.auto.tfvars.json, processados ​​em ordem lexical de seus nomes de arquivo.
+
+5. Quaisquer opções -var e -var-file na linha de comando, na ordem em que são fornecidas.
+
+
+a ultima opçāo é aque sobrescreve a posterior

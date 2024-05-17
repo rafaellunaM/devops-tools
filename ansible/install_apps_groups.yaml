@@ -1,0 +1,22 @@
+---
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install vim and nano package
+    apt:
+      name: 
+        - "{{ vim_package }}"
+        - "{{ nano_package }}"
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
+
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: install apache2 and nano
+      apt:
+        name: 
+          - "{{ apache_package }}"
+          - "{{ nano_package  }}"
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"

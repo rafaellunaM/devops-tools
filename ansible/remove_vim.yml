@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: remove vim package
+    apt:
+      name: vim
+      state: absent

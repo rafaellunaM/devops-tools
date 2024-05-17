@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install vim package
+    apt:
+      name: vim
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"

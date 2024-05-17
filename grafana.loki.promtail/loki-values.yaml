@@ -1,0 +1,79 @@
+loki:
+  auth_enabled: false
+  storage:
+    s3:
+      s3: null
+      endpoint: http://minio-cluster.x.x:9199/grafana-loki-k8s-prod
+      region: null
+      secretAccessKey: "mfsaR10IEDQgu5gQCfmfjJtv1mJBXsAR"
+      accessKeyId: "vHnAObi2nS76w5NM"
+      s3ForcePathStyle: true
+      insecure: true
+
+  storageConfig:
+    boltdb_shipper:
+      share_store: s3
+      active_index_directory: /var/loki/index
+      cache_location: /var/loki/cache
+      cache_ttl: 1h
+    fylesystem:
+      directory: /var/loki/chunks
+
+  #  aws:
+  #    s3: s3://idL2jvs2vh4dHZtkAARY:4gUTC6cwPfsC7aLJbi8sKuveguKNwZHtJX34Cfo8@https://minio.x.x/us-east-1/grafana-loki
+  #    s3ForcePathStyle: false
+  #    region: us-east-1
+  #    insecure: false
+  #    http_config:
+  #      idle_conn_timeout: 90s
+  #      response_header_timeout: 0s
+  #      insecure_skip_verify: false
+
+  schemaConfig:
+    configs:
+    - from: 2024-03-12
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      index:
+        prefix: loki_index_
+        period: 24h
+
+compactor:
+  enable: true
+  working_directory: /tml/loki/compactor
+  shared_store: s3
+  compaction_interval: 2m
+
+write:
+  persistence:
+    volumeClaimsEnabled: false
+
+read:
+  persistence:
+    volumeClaimsEnabled: false
+
+canary:
+  persistence:
+    volumeClaimsEnabled: false
+
+backend:
+  persistence:
+    volumeClaimsEnabled: false
+
+gateway:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
+    hosts:
+      - host: gateway.x.x
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: wildcard-x-x
+        hosts:
+          - gateway.x.x
