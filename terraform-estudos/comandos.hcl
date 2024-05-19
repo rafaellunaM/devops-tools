@@ -12,3 +12,11 @@ inspecionar o estado atual da infra gerenciada pelo tf:
 
 verificar se o formato do arquivo está correto:
 	terraform fmt
+
+	verificar formato de forma recursiva (todas as pastas a partir da ./):
+		terraform fmt -recursive
+
+modo interativo:
+	terraform console
+		basta escrever o nome do recursos que se deseja pesquisar:
+			exemplo: aws_s3_bucket_object.this
