@@ -12,6 +12,7 @@ resource "aws_s3_bucket" "oi_bucket" {
 resource "aws_s3_bucket" "manual" {
   
       bucket = "meubucketcriadodiretonaaws"
+
       tags = {
 
         criado = "hoje"

@@ -1,0 +1,4 @@
+{
+    "name": "${name}",
+    "gender": "${gender}"
+}
