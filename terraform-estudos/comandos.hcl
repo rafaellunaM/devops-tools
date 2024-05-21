@@ -12,9 +12,11 @@ inspecionar o estado atual da infra gerenciada pelo tf:
 
 verificar se o formato do arquivo está correto:
 	terraform fmt
-
 	verificar formato de forma recursiva (todas as pastas a partir da ./):
 		terraform fmt -recursive
+
+verifica o terraform antes de aplicar (importante)
+	terraform validate
 
 modo interativo:
 	terraform console
