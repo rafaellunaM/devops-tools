@@ -40,3 +40,31 @@ usage: What are our users doing in our enviroment? Are they interacting with our
 
 Alerting:
 Alerts are simply setting a trreshhold in a monitor. Whent that threshold is breached, a notificaton is sent to the designated recipient 
+
+### Log
+
+A log is a computer generated file that contains information regarding the usage of a system. This gives you insight into the behavior of the resource.
+
+Why do we collect logs?
+
+Compliance: Standards that the business if held to might dictate which logs you´ll need to store and for how long you need to store them.
+
+Insight: Logs can give you insight into application and system performance that metrics by themselves might not be able to provide
+
+Security: This is priority for businesses. Logs are needed to demonstrate that only authorized activities are going on inside of a system
+
+
+### Trace
+
+A trace is used to track the time spent by an application processing a request along with the execution path taken
+
+Why do we collect traces?
+
+Microservices: As business migrate away from monolithic architecture, tracing is needed to figure out what all  of the microservices are up to
+
+Optimization: Tracing allows you to optimize the performance of your applications by identifying bottlenecks in the calls being made
+
+Troubleshooting: When something goes wrong, we need insight into the actual application code. This can assist us in tracking down errors with the code.
+
+
+Alerts are simply setting a trreshhold in a monitor. Whent that threshold is breached, a notificaton is sent to the designated recipient 
