@@ -7,6 +7,18 @@ executar tf:
 verificar plano tf - mostar o que vai ser definido:
 	terraform plan
 
+terraform workspace:
+	criar workspace (é criado um diretório - terraform.tfstate.d, a cada vez que é aplicado o arquivo de estado é criado na workspace corrente) 
+	terraform workspace new <nome>
+
+	selecionar workspace
+	terraform workspace select <nome-workspace>
+
+	mostrar workspace corrente
+	terraform workspace show
+
+selecionar arquivo de vars:
+	terraform apply -var-file=arquivo-que-desejo
 inspecionar o estado atual da infra gerenciada pelo tf:
 	terraform show
 
