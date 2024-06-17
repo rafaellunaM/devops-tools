@@ -1,0 +1,21 @@
+// Pkl tem dois tipos especiais de objetos, nomeadamente listagens, que contêm 
+// exclusivamente elementos, e mapeamentos, que contêm entradas exclusivas. Tanto 
+// as listagens quanto os mapeamentos são “apenas objetos”, portanto, eles não 
+// exigem sintaxe além dos objetos:
+
+birds {
+  "Pigeon"
+  "Parrot"
+  "Barn owl"
+  "Falcon"
+}
+
+habitats {
+  ["Pigeon"] = "Streets"
+  ["Parrot"] = "Parks"
+  ["Barn owl"] = "Forests"
+  ["Falcon"] = "Mountains"
+}
+
+
+passarinho = birds [1] 

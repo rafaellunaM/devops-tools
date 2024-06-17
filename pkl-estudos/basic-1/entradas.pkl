@@ -1,0 +1,18 @@
+// A diferença com as propriedades é a notação da chave: [<expression>]- A . (í a , , , , , í , .
+// Assim como as propriedades, as entradas podem ser valores primitivos ou objetos.
+// Qualquer objeto pode ser usado como uma chave para uma entrada.
+
+pigeonShelter {
+  ["bird"] {
+    name = "Common wood pigeon"
+    diet = "Seeds"
+    taxonomy {
+      species = "Columba palumbus"
+    }
+  }
+  ["address"] = "355 Bird St."
+}
+
+birdCount {
+  [pigeonShelter] = 42
+}

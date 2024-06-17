@@ -1,0 +1,18 @@
+// elementos equivale a array
+// pode usar colchetes para acessar um elemento, por exemplo, myObject[42]
+//
+// Quando você escreve apenas o valor (sem um nome), descreve um elemento.
+//	Os elementos não precisam ser valores literais; podem ser expressões arbitrárias.
+//	Elementos podem realmente ser qualquer valor, não apenas valores primitivos.
+//
+
+exampleObjectWithJustIntElements {
+  100
+  42
+}
+
+exampleObjectWithMixedElements {
+  "Bird Breeder Conference"
+  (2000 + 23)
+  exampleObjectWithJustIntElements
+}

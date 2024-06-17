@@ -1,0 +1,52 @@
+// Você pode ler isso dizendo " pklTutorialPart2& a pklTutorialPart3São exatamente 
+// como pklTutorialPart1, exceto para o seu nameE a part
+// Quando você instancia uma classe, todas as propriedades para as quais você não fornece
+// um valor são preenchidas a partir dos valores padrão da classe.
+
+
+
+// se não definir valores padrões para a classe, seria necessário definir explicitamente no objeto
+// e outro objeto poderia herdar do anterior
+// pklTutorialPart1: TutorialPart = new {
+//  name = "Basic Configuration"
+//  part = 1
+//  hasExercises = true
+//  amountLearned = 13.37
+//  duration = 30.min
+//  bandwidthRequirementPerSecond = 50.mib.toUnit("mb")
+// }
+//
+// pklTutorialPart1: TutorialPart = new {
+//   name = "Basic Configuration"
+//   part = 1
+// }
+//
+class TutorialPart {
+    name: String
+
+    part: Int
+
+    hasExercises: Boolean = true
+
+    amountLearned: Float = 13.37
+
+    duration: Duration = 30.min
+
+    bandwidthRequirementPerSecond: DataSize = 50.mb
+}
+
+pklTutorialPart1: TutorialPart = new {
+  name = "Basic Configuration"
+  part = 1
+
+}
+
+pklTutorialPart2: TutorialPart = new {
+  name = "Filling out a Template"
+  part = 2
+}
+
+pklTutorialPart3: TutorialPart = new {
+  name = "Writing a Template"
+  part = 3
+}

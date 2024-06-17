@@ -1,0 +1,24 @@
+// 	A alteração explícita pelo índice substitui o elemento nesse índice.
+//	Sem índices explícitos, o Pkl não pode saber qual elemento substituir, então, em vez disso, ele adiciona um elemento ao objeto que você está alterando.
+//	Quando você escreve entradas "novas" (usando uma chave que não ocorre no objeto que você está alterando), Pkl também as adiciona.
+//	Quando você escreve uma entrada usando uma chave que existe, essa notação altera seu valor.
+
+favoriteFoods {
+  "red berries"
+  "blue berries"
+  ["Barn owl"] {
+    "mice"
+  }
+}
+
+adultBirdFoods = (favoriteFoods) {
+  [0] = "pebbles"
+  "worms"
+  ["Falcon"] {
+    "insects"
+    "amphibians"
+  }
+  ["Barn owl"] {
+    "fish"
+  }
+}
